@@ -3,7 +3,8 @@
 from models.base_model import Base
 from models.base_model import BaseModel
 from models.state import State
-from sqlalchemy import Column, Integer, String, ForeignKey, relationship
+from sqlalchemy import Column, Integer, String, ForeignKey
+from sqlalchemy.orm import relationship
 
 
 class City(BaseModel):
