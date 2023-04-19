@@ -128,12 +128,12 @@ class HBNBCommand(cmd.Cmd):
                 value = value.replace("_", " ")
                 try:
                     value = eval(value)
-                except:
+                except Exception:
                     pass
                 setattr(new_instance, key, value)
             storage.save()
             print(new_instance.id)
-        except:
+        except Exception:
             print("** class doesn't exist **")
             return
 
@@ -330,6 +330,7 @@ class HBNBCommand(cmd.Cmd):
         """ Help information for the update class """
         print("Updates an object with new information")
         print("Usage: update <className> <id> <attName> <attVal>\n")
+
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()
