@@ -4,11 +4,21 @@ import models
 from models.base_model import BaseModel
 from models.base_model import Base
 from os import getenv
-from sqlalchemy import Column, Integer, String, ForeignKey, Float
+from sqlalchemy import Column, Integer, String, ForeignKey, Float, Table
 from sqlalchemy.orm import relationship
 
+many_to_many = Table(
+    "place_amenity", Base.metadata,
+    Column("place_id", String(60),
+           ForeignKey("places.id"),
+           primary_key=True, nullable=False),
+    Column("amenity_id", String(60),
+           ForeignKey("amenities.id"),
+           primary_key=True, nullable=False),
+)
 
-class Place(BaseModel):
+
+class Place(BaseModel, Base):
     """ A place to stay """
     __tablename__ = 'places'
     city_id = Column(String(60), ForeignKey("cities.id"), nullable=False)
@@ -23,6 +33,8 @@ class Place(BaseModel):
     longitude = Column(Float, default=0, nullable=True)
     amenity_ids = []
     reviews = relationship("Review", backref="place", cascade="delete")
+    amenities = relationship("Amenity", secondary="place_amenity",
+                             viewonly=False)
 
     if getenv('HBNB_TYPE_STORAGE') != 'db':
         @property
@@ -33,3 +45,17 @@ class Place(BaseModel):
                 if review.place_id == self.id:
                     reviews.append(review)
             return reviews
+
+        @property
+        def amenities(self):
+            """Returns a list of Amenities matching amenities id."""
+            amenities_list = []
+            for amenity in list(models.storage.all(Amenity).values()):
+                if amenity.id in self.amenity_ids:
+                    amenities_list.append(amenity)
+            return amenities
+
+        @amenities.setter
+        def amenities(self, value):
+            if type(value) == Amenity:
+                self.amenity_ids.append(value.id)
