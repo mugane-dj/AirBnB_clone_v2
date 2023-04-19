@@ -1,6 +1,7 @@
 """Defines DBStorage class"""
 
 import models
+from os import getenv
 from models.amenity import Amenity
 from models.base_model import BaseModel, Base
 import sqlalchemy
