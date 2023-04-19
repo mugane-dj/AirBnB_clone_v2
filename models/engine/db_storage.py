@@ -1,25 +1,4 @@
-<<<<<<< HEAD
 """Defines DBStorage class"""
-import os
-from sqlalchemy import create_engine, MetaData
-from sqlalchemy.orm import sessionmaker
-from sqlalchemy.orm import scoped_session
-from models.base_model import Base
-from models.state import State
-from models.city import City
-from models.user import User
-from models.place import Place
-from models.review import Review
-from models.amenity import Amenity
-
-
-class DBStorage:
-    """DBStorage class"""
-=======
-#!/usr/bin/python3
-"""
-Contains the class DBStorage
-"""
 
 import models
 from models.amenity import Amenity
@@ -27,6 +6,7 @@ from models.base_model import BaseModel, Base
 import sqlalchemy
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
+
 
 class DBStorage:
     """interacts with the MySQL database"""
