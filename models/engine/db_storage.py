@@ -3,9 +3,10 @@
 import models
 from os import getenv
 from models.amenity import Amenity
-from models.base_model import BaseModel, Base
-import sqlalchemy
-from sqlalchemy import create_engine
+from models.base_model import Base
+from models.state import State
+from models.city import City
+from sqlalchemy import create_engine, MetaData
 from sqlalchemy.orm import scoped_session, sessionmaker
 
 
@@ -55,7 +56,7 @@ class DBStorage:
 
     def reload(self):
         """reloads data from the database"""
-        Base.metadata.create_all(self.__engine)
+        self.__session = Base.metadata.create_all(self.__engine)
         sess_factory = sessionmaker(bind=self.__engine, expire_on_commit=False)
         Session = scoped_session(sess_factory)
         self.__session = Session
