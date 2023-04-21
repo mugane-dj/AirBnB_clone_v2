@@ -133,7 +133,7 @@ class HBNBCommand(cmd.Cmd):
                     except Exception:
                         pass
                     setattr(new_instance, key, value)
-            storage.save()
+            new_instance.save()
             print(new_instance.id)
         except Exception:
             print("** class doesn't exist **")
