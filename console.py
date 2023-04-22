@@ -118,10 +118,9 @@ class HBNBCommand(cmd.Cmd):
         if not args:
             print("** class name missing **")
             return
+        args = args.split()
+        classname = args[0]
         try:
-            args = args.split()
-            classname = str(args[0])
-            print(classname)
             new_instance = HBNBCommand.classes[classname]()
             for arg in args[1:]:
                 key = arg.split("=")[0]
@@ -135,7 +134,8 @@ class HBNBCommand(cmd.Cmd):
                     setattr(new_instance, key, value)
             new_instance.save()
             print(new_instance.id)
-        except Exception:
+        except Exception as e:
+            print(str(e))
             print("** class doesn't exist **")
             return
 
@@ -212,21 +212,19 @@ class HBNBCommand(cmd.Cmd):
 
     def do_all(self, args):
         """ Shows all objects, or all objects of a class"""
-        print_list = []
+        output = []
 
-        if args:
-            args = args.split(' ')[0]  # remove possible trailing args
-            if args not in HBNBCommand.classes:
-                print("** class doesn't exist **")
-                return
-            for k, v in storage._FileStorage__objects.items():
-                if k.split('.')[0] == args:
-                    print_list.append(str(v))
+        args = args.split(' ')[0]  # remove possible trailing args
+        if args not in HBNBCommand.classes:
+            print("** class doesn't exist **")
+            return
         else:
-            for k, v in storage._FileStorage__objects.items():
-                print_list.append(str(v))
-
-        print(print_list)
+            for obj in storage.all().values():
+                if args == obj.__class__.__name__:
+                    output.append(obj.__str__())
+                elif len(args) == 0:
+                    output.append(obj.__str__())
+            print(output)
 
     def help_all(self):
         """ Help information for the all command """
