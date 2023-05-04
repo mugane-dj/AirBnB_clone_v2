@@ -7,20 +7,18 @@ echo "Installing nginx..."
 sudo apt-get -y install nginx
 sleep 2
 echo "Setting up file structure..."
-mkdir -p '/data/'
-mkdir -p '/data/webstatic/'
-mkdir -p '/data/web_static/releases/'
-mkdir -p '/data/web_static/shared/'
-mkdir -p '/data/web_static/releases/test/'
-echo "
-<html>
+sudo mkdir -p '/data/'
+sudo mkdir -p '/data/webstatic/'
+sudo mkdir -p '/data/web_static/releases/'
+sudo mkdir -p '/data/web_static/shared/'
+sudo mkdir -p '/data/web_static/releases/test/'
+echo "<html>
   <head>
   </head>
   <body>
     Holberton School
   </body>
-</html>
-" | sudo tee '/data/web_static/releases/test/index.html'
+</html>" | sudo tee '/data/web_static/releases/test/index.html'
 sudo ln -sf '/data/web_static/releases/test/' '/data/web_static/current'
 sudo chown -R ubuntu:ubuntu '/data/'
 sleep 2
