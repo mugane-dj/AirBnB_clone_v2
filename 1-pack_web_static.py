@@ -10,11 +10,11 @@ from datetime import datetime
 
 def do_pack():
     """Generate .tgz archive"""
-    local("mkdir -p versions")
-    _datetime = datetime.now()
-    archive = "web_static_" + _datetime.strftime("%Y%m%d%H%M%S") + ".tgz"
-    result = local("tar -cvzf versions/{} web_static".format(archive))
-    if result.return_code == 0:
-        return "versions/" + archive
-    else:
+    try:
+        local("mkdir -p versions")
+        _datetime = datetime.now()
+        archive = "versions/web_static_" + _datetime.strftime("%Y%m%d%H%M%S") + ".tgz"
+        result = local("tar -cvzf {} web_static/".format(archive))
+        return archive
+    except:
         return None
