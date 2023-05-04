@@ -13,8 +13,8 @@ def do_pack():
     try:
         local("mkdir -p versions")
         _datetime = datetime.now()
-        archive = "versions/web_static_" + _datetime.strftime("%Y%m%d%H%M%S") + ".tgz"
-        local("tar -cvzf {} web_static/".format(archive))
-        return archive
-    except:
+        archive = "web_static_" + _datetime.strftime("%Y%m%d%H%M%S") + ".tgz"
+        local("tar -cvzf versions/{} web_static/".format(archive))
+        return "versions/" + archive
+    except Exception:
         return None
