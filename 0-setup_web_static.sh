@@ -7,11 +7,7 @@ echo "Installing nginx..."
 sudo apt-get -y install nginx
 sleep 2
 echo "Setting up file structure..."
-sudo mkdir -p '/data/'
-sudo mkdir -p '/data/web_static/'
-sudo mkdir -p '/data/web_static/releases/'
-sudo mkdir -p '/data/web_static/shared/'
-sudo mkdir -p '/data/web_static/releases/test/'
+sudo mkdir -p /data/web_static/releases/test /data/web_static/shared/
 echo "<html>
   <head>
   </head>
