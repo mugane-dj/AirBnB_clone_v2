@@ -16,7 +16,7 @@ env.hosts = [
 
 
 def do_deploy(archive_path):
-    """Uploads we_static to servers"""
+    """Uploads web_static to host servers"""
     if os.path.isfile(archive_path):
         try:
             file_name_ext = archive_path.split("/")[-1]
