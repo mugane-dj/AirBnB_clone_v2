@@ -27,7 +27,7 @@ env.hosts = [
 
 
 def do_deploy(archive_path):
-    """Uploads we_static to servers"""
+    """Uploads web_static to host servers"""
     if os.path.isfile(archive_path):
         try:
             file_name_ext = archive_path.split("/")[-1]
@@ -41,8 +41,8 @@ def do_deploy(archive_path):
             run("mkdir -p {}".format(path))
             run("tar -xzf {} -C {}".format(path_ext, path))
             run("rm -rf {}".format(path_ext))
-            run("mv {}/web_static/* {}".format(path, path))
-            run("rm -rf {}/web_static".format(path))
+            run("mv {}web_static/* {}".format(path, path))
+            run("rm -rf {}web_static".format(path))
             run("rm -rf /data/web_static/current")
             run("ln -s {} /data/web_static/current".format(path))
             return True
