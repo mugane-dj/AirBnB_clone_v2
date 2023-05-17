@@ -7,7 +7,7 @@ echo "Installing nginx..."
 sudo apt-get -y install nginx
 sleep 2
 echo "Setting up file structure..."
-sudo mkdir -p /data/web_static/releases/test /data/web_static/shared/
+sudo mkdir -p '/data/web_static/releases/test' '/data/web_static/shared/'
 echo "<html>
   <head>
   </head>
@@ -16,7 +16,7 @@ echo "<html>
   </body>
 </html>" | sudo tee '/data/web_static/releases/test/index.html'
 sudo ln -sf '/data/web_static/releases/test/' '/data/web_static/current'
-sudo chown -R ubuntu:ubuntu '/data/'
+sudo chown -hR ubuntu:ubuntu '/data/'
 sleep 2
 echo "Configuring nginx..."
 echo "Ceci n'est pas une page" | sudo tee /var/www/html/custom_404.html
@@ -34,7 +34,7 @@ echo "server {
         root /var/www/html;
     }
 
-    location /hbnb_static {
+    location /hbnb_static/ {
         alias /data/web_static/current/;
         autoindex off;
     }
