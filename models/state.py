@@ -2,9 +2,8 @@
 """ State Module for HBNB project """
 from os import getenv
 from models.base_model import BaseModel, Base
-from models.city import City
 from sqlalchemy import Column, Integer, String, ForeignKey
-from models.engine.file_storage import FileStorage
+from models import storage
 
 
 class State(BaseModel, Base):
