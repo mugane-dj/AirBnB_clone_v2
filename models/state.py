@@ -18,6 +18,6 @@ class State(BaseModel, Base):
         def cities(self):
             """Return the list of City objects from storage linked to the
             current State"""
-            city_objs = storage.all(City)
+            city_objs = storage.all(City).values()
             return [city_obj for city_obj in city_objs
-                    if city_obj.state_id == State.id]
+                    if city_obj.state_id == self.id]
