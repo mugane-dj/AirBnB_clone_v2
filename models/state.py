@@ -16,4 +16,6 @@ class State(BaseModel, Base):
 
         @property
         def cities(self):
-            pass
+            city_objs = storage.all(City)
+            return [city_obj for city_obj in city_objs
+                    if city_obj.state_id == State.id]
