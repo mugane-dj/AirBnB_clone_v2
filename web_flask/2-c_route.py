@@ -20,8 +20,8 @@ def hbnb():
 
 @app.route("/c/<text>", strict_slashes=False)
 def display(text):
-    text = text.replace('_', ' ')
-    return f"C {text}"
+    safe_text = text.replace('_', ' ')
+    return f"C {safe_text}"
 
 
 if __name__ == '__main__':
