@@ -18,7 +18,7 @@ class BaseModel:
     updated_at = Column(DateTime, default=datetime.utcnow(), nullable=False)
 
     def __init__(self, *args, **kwargs):
-        """Instatntiates a new model"""
+        """Instantiates a new model"""
         self.id = str(uuid.uuid4())
         self.created_at = datetime.now()
         self.updated_at = datetime.now()
@@ -32,8 +32,10 @@ class BaseModel:
 
     def __str__(self):
         """Returns a string representation of the instance"""
+        my_dict = self.__dict__.copy()
+        my_dict.pop("_sa_instance_state", None)
         cls = (str(type(self)).split('.')[-1]).split('\'')[0]
-        return '[{}] ({}) {}'.format(cls, self.id, self.__dict__)
+        return '[{}] ({}) {}'.format(cls, self.id, my_dict)
 
     def save(self):
         """Updates updated_at with current time when instance is changed"""
@@ -52,6 +54,5 @@ class BaseModel:
                           (str(type(self)).split('.')[-1]).split('\'')[0]})
         dictionary['created_at'] = self.created_at.isoformat()
         dictionary['updated_at'] = self.updated_at.isoformat()
-        if '_sa_instance_state' in dictionary.keys():
-            dictionary.pop('_sa_instance_state')
+        dictionary.pop('_sa_instance_state', None)
         return dictionary
