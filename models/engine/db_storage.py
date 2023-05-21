@@ -34,9 +34,9 @@ class DBStorage:
     def all(self, cls=None):
         """query on the current database session"""
         classes = {
-               'BaseModel': BaseModel, 'User': User, 'Place': Place,
-               'State': State, 'City': City, 'Amenity': Amenity,
-               'Review': Review
+            'BaseModel': BaseModel, 'User': User, 'Place': Place,
+            'State': State, 'City': City, 'Amenity': Amenity,
+            'Review': Review
         }
         new_dict = {}
         if cls is not None:
