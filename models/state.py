@@ -1,9 +1,9 @@
 #!/usr/bin/python3
 """ State Module for HBNB project """
+import models
 from os import getenv
 from models.base_model import BaseModel, Base
 from sqlalchemy import Column, Integer, String, ForeignKey
-from models import storage
 
 
 class State(BaseModel, Base):
@@ -18,6 +18,6 @@ class State(BaseModel, Base):
         def cities(self):
             """Return the list of City objects from storage linked to the
             current State"""
-            city_objs = storage.all(City).values()
+            city_objs = models.storage.all(models.city.City).values()
             return [city_obj for city_obj in city_objs
                     if city_obj.state_id == self.id]
