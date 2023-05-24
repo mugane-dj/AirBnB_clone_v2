@@ -28,7 +28,7 @@
                 {% for city in cities | sort(attribute='name') %} {% if
                 city.state_id == state.id %}
                 <li><h4>{{ city.name }}</h4></li>
-                {% ednif %} {% endfor %}
+                {% endif %} {% endfor %}
               </ul>
               {% endfor %}
             </li>
