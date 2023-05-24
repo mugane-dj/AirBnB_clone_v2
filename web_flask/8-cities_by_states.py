@@ -14,12 +14,10 @@ app = Flask(__name__)
 
 @app.route('/cities_by_states', strict_slashes=False)
 def states_list():
-    states = list(models.storage.all('State').values())
-    cities = list(models.storage.all('City').values())
-    sorted_states = sorted(states, key=lambda state: state.name)
-    sorted_cities = sorted(cities, key=lambda city: city.name)
-    return render_template('8-cities_by_states.html', states=sorted_states,
-                           cities=sorted_cities)
+    states = models.storage.all('State').values()
+    cities = models.storage.all('City').values()
+    return render_template('8-cities_by_states.html', states=states,
+                           cities=cities)
 
 
 @app.teardown_appcontext
