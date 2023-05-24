@@ -16,8 +16,9 @@ app = Flask(__name__)
 def states_list():
     states = list(models.storage.all('State').values())
     sorted_states = sorted(states, key=lambda state: state.name)
-    return render_template('7-states_list.html', states=sorted_states) 
-        
+    return render_template('7-states_list.html', states=sorted_states)
+
+
 @app.route('/states/<id>', strict_slashes=False)
 def state_by_id(id):
     state_obj = None
@@ -26,7 +27,8 @@ def state_by_id(id):
         if state.id == id:
             state_obj = state
     return render_template('9-states.html', state=state_obj)
-    
+
+
 @app.teardown_appcontext
 def teardown_appcontext(self):
     models.storage.close()
